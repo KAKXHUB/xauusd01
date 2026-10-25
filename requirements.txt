@@ -1,0 +1,5 @@
+streamlit
+yfinance
+mplfinance
+numpy
+tensorflow-cpu
