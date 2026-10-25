@@ -37,11 +37,18 @@ if st.button("วิเคราะห์กราฟทองคำล่าส
     with st.spinner("กำลังดึงข้อมูลและวิเคราะห์..."):
         
         # 1. ดึงข้อมูล
-        df_live = yf.download('GC=F', period='10d', interval='15m', progress=False)
+
+        df_live = yf.download('GC=F', period='10d', interval='15m')
         if isinstance(df_live.columns, pd.MultiIndex):
             df_live.columns = df_live.columns.droplevel('Ticker')
         df_live.dropna(inplace=True)
         df_live.index = df_live.index.tz_convert('Asia/Bangkok')
+
+        # df_live = yf.download('GC=F', period='10d', interval='15m', progress=False)
+        # if isinstance(df_live.columns, pd.MultiIndex):
+        #     df_live.columns = df_live.columns.droplevel('Ticker')
+        # df_live.dropna(inplace=True)
+        # df_live.index = df_live.index.tz_convert('Asia/Bangkok')
         
         df_live['MA20'] = df_live['Close'].rolling(window=20).mean()
         df_live['MA50'] = df_live['Close'].rolling(window=50).mean()
