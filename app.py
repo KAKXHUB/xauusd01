@@ -38,6 +38,8 @@ if st.button("วิเคราะห์กราฟทองคำล่าส
         
         # 1. ดึงข้อมูล
         df_live = yf.download('GC=F', period='10d', interval='15m', progress=False)
+        if isinstance(df_live.columns, pd.MultiIndex):
+            df_live.columns = df_live.columns.droplevel('Ticker')
         df_live.dropna(inplace=True)
         df_live.index = df_live.index.tz_convert('Asia/Bangkok')
         
