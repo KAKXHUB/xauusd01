@@ -7,6 +7,7 @@ from tensorflow.keras.preprocessing import image
 import os
 import warnings
 import gdown
+import pandas as pd
 
 warnings.filterwarnings('ignore')
 
