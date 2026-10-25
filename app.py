@@ -6,6 +6,8 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import os
 import warnings
+import gdown
+
 warnings.filterwarnings('ignore')
 
 # ตั้งค่าหน้าเว็บ
@@ -16,7 +18,17 @@ st.write("กดปุ่มด้านล่างเพื่อดึงก�
 # โหลดโมเดล (ใช้ @st.cache_resource เพื่อไม่ให้โหลดใหม่ทุกครั้งที่กดปุ่ม)
 @st.cache_resource
 def load_ai_model():
-    return tf.keras.models.load_model('gold_vision_ai.h5')
+    model_path = 'gold_vision_ai.h5'
+    
+    # เช็คว่ามีไฟล์โมเดลในระบบหรือยัง ถ้ายังไม่มีให้โหลดจาก Google Drive
+    if not os.path.exists(model_path):
+        st.info("กำลังดาวน์โหลดสมอง AI ครั้งแรก (อาจใช้เวลา 1-2 นาที)...")
+        # เอา File ID ที่ก็อปปี้มา มาใส่แทนที่ข้อความด้านล่างนี้
+        file_id = 'ใส่_รหัส_FILE_ID_ของคุณตรงนี้'
+        url = f'https://drive.google.com/uc?id={file_id}'
+        gdown.download(url, model_path, quiet=False)
+        
+    return tf.keras.models.load_model(model_path)
 
 model = load_ai_model()
 class_names = ['DOWN', 'SIDEWAYS', 'UP']
