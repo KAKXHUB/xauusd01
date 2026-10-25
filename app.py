@@ -24,7 +24,7 @@ def load_ai_model():
     if not os.path.exists(model_path):
         st.info("กำลังดาวน์โหลดสมอง AI ครั้งแรก (อาจใช้เวลา 1-2 นาที)...")
         # เอา File ID ที่ก็อปปี้มา มาใส่แทนที่ข้อความด้านล่างนี้
-        file_id = 'ใส่_รหัส_FILE_ID_ของคุณตรงนี้'
+        file_id = '1bRhyjY4Ys02Bw-7LUxV_UCVX3b8BOfjE'
         url = f'https://drive.google.com/uc?id={file_id}'
         gdown.download(url, model_path, quiet=False)
         
